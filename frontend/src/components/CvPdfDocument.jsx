@@ -163,7 +163,7 @@ export const CvPdfDocument = ({ data, template, order }) => {
     <Document title={`${fullName} - CV`} author={fullName}>
       <Page size="A4" style={s.page}>
         <View style={s.header}>
-          {t.showPhoto ? (
+          {(p.photo || t.showPhoto) ? (
             <View style={s.headerRow}>
               {p.photo ? <Image src={p.photo} style={s.photo} /> : null}
               <View style={{ flex: 1 }}>

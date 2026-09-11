@@ -24,7 +24,7 @@ export const CvPreviewPaper = ({ data, template, order }) => {
   const p = data.personal || {};
   const fullName = `${p.firstName || ""} ${p.lastName || ""}`.trim() || "Adınız Soyadınız";
   const contacts = [p.email, p.phone, p.location, p.linkedin, p.github, p.website].filter(Boolean);
-  const showPhoto = t.showPhoto;
+  const showPhoto = Boolean(p.photo) || t.showPhoto;
 
   const headerText = (
     <div className="min-w-0" style={{ textAlign: showPhoto ? "left" : t.align }}>

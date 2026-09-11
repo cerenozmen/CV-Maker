@@ -40,7 +40,7 @@ export const PersonalDetailsForm = ({ data, update }) => {
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-[13px] font-semibold text-slate-700">Profil Fotoğrafı</p>
-          <p className="text-[11px] text-slate-400">İsteğe bağlı — yalnızca "Fotoğraflı" şablonda görünür. ATS uyumunu etkilemez.</p>
+          <p className="text-[11px] text-slate-400">İsteğe bağlı — yüklediğinizde önizlemede ve PDF'te başlıkta görünür. ATS uyumunu etkilemez.</p>
           <div className="mt-2 flex flex-wrap gap-2">
             <input ref={fileRef} type="file" accept="image/*" onChange={onPhoto} className="hidden" data-testid="input-photo" />
             <button type="button" onClick={() => fileRef.current?.click()} data-testid="upload-photo-button" className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-slate-700">
