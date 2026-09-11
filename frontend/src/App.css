@@ -1,0 +1,8 @@
+.App {
+  text-align: left;
+}
+
+/* keep month inputs consistent height */
+input[type="month"] {
+  min-height: 2.5rem;
+}

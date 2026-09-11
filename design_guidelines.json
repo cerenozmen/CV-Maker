@@ -1,0 +1,157 @@
+{
+  "project_type": "Hybrid Fullstack - ATS Uyumlu Profesyonel CV Oluşturucu (Turkish UI)",
+  "language": "tr",
+  "theme_archetype": "Swiss High-Contrast & Modern SaaS Command Studio",
+  "typography": {
+    "builder_ui": {
+      "headline_font": "Cabinet Grotesk / Plus Jakarta Sans / Inter",
+      "body_font": "Inter / system-ui",
+      "h1_hero": "text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100",
+      "h2_section": "text-lg font-semibold tracking-tight text-slate-800 dark:text-slate-200",
+      "h3_card": "text-base font-medium text-slate-700 dark:text-slate-300",
+      "label": "text-xs font-semibold uppercase tracking-wider text-slate-500"
+    },
+    "ats_document_preview": {
+      "ats_font_family": "Arial, Helvetica, 'Liberation Sans', sans-serif",
+      "name_heading": "text-2xl font-bold uppercase tracking-wide text-slate-900 border-b border-slate-300 pb-2 mb-2",
+      "contact_line": "text-xs font-normal text-slate-700 mb-4 leading-relaxed",
+      "section_header": "text-sm font-bold uppercase tracking-wider text-slate-900 border-b-2 border-slate-800 pb-1 mt-4 mb-2.5",
+      "item_title": "text-sm font-bold text-slate-900",
+      "item_subtitle": "text-xs font-semibold text-slate-700 italic",
+      "item_date": "text-xs font-medium text-slate-600 text-right shrink-0",
+      "body_text": "text-xs leading-normal text-slate-800",
+      "bullet_list": "list-disc pl-4 space-y-1 text-xs text-slate-800"
+    }
+  },
+  "colors": {
+    "builder_ui": {
+      "background": "#F8FAFC",
+      "header_bg": "#0F172A",
+      "header_text": "#F8FAFC",
+      "card_bg": "#FFFFFF",
+      "border": "#E2E8F0",
+      "primary": "#2563EB",
+      "primary_hover": "#1D4ED8",
+      "accent_emerald": "#10B981",
+      "accent_amber": "#F59E0B",
+      "text_dark": "#0F172A",
+      "text_muted": "#64748B"
+    },
+    "ats_document": {
+      "paper_bg": "#FFFFFF",
+      "text_primary": "#000000",
+      "text_secondary": "#333333",
+      "divider_line": "#1E293B"
+    }
+  },
+  "spacing_and_layout": {
+    "layout_mode": "Split Screen (50/50 or 45/55 Split on Desktop, Tabbed Switcher on Mobile)",
+    "container_padding": "p-4 sm:p-6 lg:p-8",
+    "form_gap": "gap-4 sm:gap-6",
+    "a4_paper_dimensions": {
+      "aspect_ratio": "aspect-[1/1.414]",
+      "min_height": "min-h-[1050px]",
+      "padding": "p-10 sm:p-12",
+      "shadow": "shadow-2xl border border-slate-300"
+    }
+  },
+  "visual_enhancers": {
+    "preview_canvas_wrapper": "bg-slate-200/80 dark:bg-slate-900 p-6 rounded-xl flex items-center justify-center overflow-auto min-h-[calc(100vh-120px)]",
+    "ats_score_badge": "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300",
+    "sticky_top_bar": "sticky top-0 z-40 bg-slate-900 text-white backdrop-blur-md bg-opacity-95 px-6 py-3 border-b border-slate-800 flex items-center justify-between"
+  },
+  "component_structure": {
+    "app_root": "/src/App.js",
+    "components": [
+      {
+        "name": "HeaderNav",
+        "path": "/src/components/HeaderNav.js",
+        "purpose": "Top navigation with app title 'ATS CV Hazırlayıcı', sample dataset loader ('Örnek Veri Yükle'), clear form button ('Temizle'), and primary 'PDF İndir' CTA."
+      },
+      {
+        "name": "AtsScoreChecker",
+        "path": "/src/components/AtsScoreChecker.js",
+        "purpose": "Real-time ATS quality audit widget checking contact completeness, date formatting, bullet counts, single-column rule compliance, and key sections."
+      },
+      {
+        "name": "CvFormEditor",
+        "path": "/src/components/CvFormEditor.js",
+        "purpose": "Left pane accordion/tabbed editor container for all CV sections."
+      },
+      {
+        "name": "PersonalDetailsForm",
+        "path": "/src/components/forms/PersonalDetailsForm.js",
+        "purpose": "Ad, Soyad, Unvan, E-posta, Telefon, Konum (İl/İlçe), LinkedIn, GitHub, Web Sitesi."
+      },
+      {
+        "name": "ProfileSummaryForm",
+        "path": "/src/components/forms/ProfileSummaryForm.js",
+        "purpose": "Profesyonel Özet / Profil metin alanı (AI/ATS önerili ipuçları ile)."
+      },
+      {
+        "name": "WorkExperienceForm",
+        "path": "/src/components/forms/WorkExperienceForm.js",
+        "purpose": "İş deneyimi ekle/çıkar listesi: Şirket, Pozisyon, Şehir, Başlangıç Tarihi, Bitiş Tarihi, Halen Çalışıyorum seçeneği, Sorumluluklar/Başarılar (maddeler)."
+      },
+      {
+        "name": "EducationForm",
+        "path": "/src/components/forms/EducationForm.js",
+        "purpose": "Eğitim bilgisi ekle/çıkar listesi: Okul/Üniversite, Bölüm/Derece, Şehir, Başlangıç Tarihi, Mezuniyet Tarihi, Not Ortalaması (isteğe bağlı)."
+      },
+      {
+        "name": "SkillsForm",
+        "path": "/src/components/forms/SkillsForm.js",
+        "purpose": "Teknik ve Sosyal Beceriler düzenleme (Virgülle ayrılmış veya etiket bazlı ekleme)."
+      },
+      {
+        "name": "ProjectsForm",
+        "path": "/src/components/forms/ProjectsForm.js",
+        "purpose": "Projeler ekle/çıkar: Proje Adı, Rol, Başlangıç/Bitiş Tarihi, Proje Linki, Açıklama maddeleri."
+      },
+      {
+        "name": "CertificatesForm",
+        "path": "/src/components/forms/CertificatesForm.js",
+        "purpose": "Sertifikalar ekle/çıkar: Sertifika Adı, Kurum, Alınma Tarihi, Geçerlilik Tarihi, Sertifika No/Link."
+      },
+      {
+        "name": "LanguagesForm",
+        "path": "/src/components/forms/LanguagesForm.js",
+        "purpose": "Diller ekle/çıkar: Dil, Seviye (Ana Dil, İleri, Orta, Başlangıç)."
+      },
+      {
+        "name": "CvPreviewPaper",
+        "path": "/src/components/CvPreviewPaper.js",
+        "purpose": "The single-column ATS document preview matching pure text parsing rules."
+      },
+      {
+        "name": "PdfDownloadManager",
+        "path": "/src/components/PdfDownloadManager.js",
+        "purpose": "Handles instant browser-side PDF generation using html2pdf.js / html2canvas + jspdf or clean window.print fallback."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Language must be strictly TURKISH across the entire UI and default sample data.",
+    "The CV preview canvas MUST enforce a clean single-column structure with standard text element markup (h1, h2, h3, p, ul, li) and standard system fonts so ATS software can easily parse text.",
+    "Do NOT place contact details inside header/footer elements of the PDF export container; place them directly inside the top body flow of the main page.",
+    "Provide a pre-filled realistic Turkish sample CV (e.g., 'Ahmet Yılmaz - Kıdemli Yazılım Geliştirici') so the user immediately sees a populated preview on launch.",
+    "Include 'Örnek Veriyi Yükle' (Load Sample Data) and 'Formu Temizle' (Clear Form) controls in the top navigation bar or editor action bar.",
+    "Ensure all input fields for dates (Başlangıç Tarihi, Bitiş Tarihi / Alınma Tarihi) support clear month-year formats (e.g. 'Ocak 2022' or '2022-01') and 'Halen Devam Ediyor' checkboxes for ongoing roles/education.",
+    "Support collapsible accordion sections or tabbed steps on the left side to keep the builder clean and organized.",
+    "Add 'data-testid' attributes to all form inputs, section toggles, add/remove buttons, preview container, and PDF download button (e.g., data-testid='pdf-download-button', data-testid='input-first-name', data-testid='add-experience-button').",
+    "Provide a mobile tab toggle ('Düzenle' / 'Canlı Önizleme') on screens smaller than lg breakpoint so mobile users can easily switch between editing and viewing the paper."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic outputs. In frontend design, create distinct, high-polished frontends that surprise and delight.",
+    "Never use dark color gradients. Dark colors look good when used solid or with crisp 1px borders.",
+    "Create visual hierarchy with generous spacing (p-6, p-8), high contrast text, and clear borders.",
+    "You MUST NOT apply universal transition (transition: all). Always target specific properties like transition-colors or transition-transform.",
+    "You MUST NOT center align the app main text flow.",
+    "Every interaction needs micro-animations: subtle hover scale on buttons, smooth tab changes, clean accordion expand/collapse.",
+    "Never use generic AI emojis (🤖, 🧠, 💡) for standard UI icons. Use Lucide icons (e.g., Download, Plus, Trash2, CheckCircle2, FileText, Sparkles, User, Briefcase, GraduationCap, Award, Globe, Languages).",
+    "Ensure interactive components have explicit focus and hover text states with strong contrast ratios."
+  ]
+},
+overwrite: true,
+path: "/app/design_guidelines.json"
+}
