@@ -1,21 +1,31 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Field } from "./Field";
 import { fileToResizedDataUrl } from "../../lib/cvUtils";
-import { Upload, Trash2, User } from "lucide-react";
+import { PhotoCropperDialog } from "../PhotoCropperDialog";
+import { Upload, Trash2, User, Crop } from "lucide-react";
 
 export const PersonalDetailsForm = ({ data, update }) => {
   const set = (key) => (val) => update({ ...data, [key]: val });
   const fileRef = useRef(null);
+  const [cropOpen, setCropOpen] = useState(false);
 
   const onPhoto = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
-      const dataUrl = await fileToResizedDataUrl(file, 400);
-      update({ ...data, photo: dataUrl });
+      const original = await fileToResizedDataUrl(file, 800);
+      update({ ...data, photoOriginal: original, photoCrop: null });
+      setCropOpen(true);
     } catch (_) { /* ignore */ }
     e.target.value = "";
   };
+
+  const onCropSave = (croppedDataUrl, cropState) => {
+    update({ ...data, photo: croppedDataUrl, photoCrop: cropState });
+    setCropOpen(false);
+  };
+
+  const removePhoto = () => update({ ...data, photo: "", photoOriginal: "", photoCrop: null });
 
   return (
     <div className="flex flex-col gap-4">
@@ -31,19 +41,32 @@ export const PersonalDetailsForm = ({ data, update }) => {
         <div className="min-w-0 flex-1">
           <p className="text-[13px] font-semibold text-slate-700">Profil Fotoğrafı</p>
           <p className="text-[11px] text-slate-400">İsteğe bağlı — yalnızca "Fotoğraflı" şablonda görünür. ATS uyumunu etkilemez.</p>
-          <div className="mt-2 flex gap-2">
+          <div className="mt-2 flex flex-wrap gap-2">
             <input ref={fileRef} type="file" accept="image/*" onChange={onPhoto} className="hidden" data-testid="input-photo" />
             <button type="button" onClick={() => fileRef.current?.click()} data-testid="upload-photo-button" className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-slate-700">
               <Upload className="h-3.5 w-3.5" /> Yükle
             </button>
-            {data.photo && (
-              <button type="button" onClick={() => update({ ...data, photo: "" })} data-testid="remove-photo-button" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:border-red-300 hover:text-red-500">
+            {data.photoOriginal && (
+              <button type="button" onClick={() => setCropOpen(true)} data-testid="edit-photo-button" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:border-blue-300 hover:text-blue-600">
+                <Crop className="h-3.5 w-3.5" /> Kırp
+              </button>
+            )}
+            {(data.photo || data.photoOriginal) && (
+              <button type="button" onClick={removePhoto} data-testid="remove-photo-button" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:border-red-300 hover:text-red-500">
                 <Trash2 className="h-3.5 w-3.5" /> Kaldır
               </button>
             )}
           </div>
         </div>
       </div>
+
+      <PhotoCropperDialog
+        open={cropOpen}
+        src={data.photoOriginal}
+        initialCrop={data.photoCrop}
+        onCancel={() => setCropOpen(false)}
+        onSave={onCropSave}
+      />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="Ad" value={data.firstName} onChange={set("firstName")} placeholder="Ahmet" testId="input-first-name" />
