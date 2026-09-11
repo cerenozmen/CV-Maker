@@ -3,13 +3,13 @@ import { pdf } from "@react-pdf/renderer";
 import { CvPdfDocument } from "./CvPdfDocument";
 import { FileText, Download, Sparkles, Eraser, Loader2 } from "lucide-react";
 
-export const HeaderNav = ({ data, onLoadSample, onClear }) => {
+export const HeaderNav = ({ data, template, order, onLoadSample, onClear }) => {
   const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {
     try {
       setLoading(true);
-      const blob = await pdf(<CvPdfDocument data={data} />).toBlob();
+      const blob = await pdf(<CvPdfDocument data={data} template={template} order={order} />).toBlob();
       const url = URL.createObjectURL(blob);
       const p = data.personal || {};
       const name = `${p.firstName || "CV"}_${p.lastName || ""}`.trim().replace(/\s+/g, "_");

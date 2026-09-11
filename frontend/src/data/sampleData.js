@@ -1,6 +1,10 @@
 import { uid } from "../lib/cvUtils";
+import { DEFAULT_TEMPLATE } from "../lib/templates";
+import { DEFAULT_SECTION_ORDER } from "../lib/sections";
 
 export const emptyCv = () => ({
+  template: DEFAULT_TEMPLATE,
+  sectionOrder: [...DEFAULT_SECTION_ORDER],
   personal: {
     firstName: "",
     lastName: "",
@@ -22,6 +26,8 @@ export const emptyCv = () => ({
 });
 
 export const sampleCv = () => ({
+  template: DEFAULT_TEMPLATE,
+  sectionOrder: [...DEFAULT_SECTION_ORDER],
   personal: {
     firstName: "Ahmet",
     lastName: "Yılmaz",

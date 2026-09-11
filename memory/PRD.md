@@ -24,10 +24,7 @@ ATS uyumlu, sade ve profesyonel CV oluşturan bir full-stack web uygulaması. Ku
 - ATS uyum skoru (gerçek zamanlı 9 kontrol).
 - Örnek Veri Yükle / Formu Temizle.
 - Tek tıkla PDF indirme (Türkçe karakterler doğru, metin extract edilebilir).
-- Verified: build OK, live preview updates, PDF renders valid Turkish text, testing agent 100% frontend pass.
-
-## Backlog (P1/P2)
-- P1: Birden fazla CV şablonu/tema seçimi.
-- P1: Bölüm sıralamasını sürükle-bırak ile değiştirme.
-- P2: JSON olarak dışa/içe aktarma.
-- P2: İş ilanı anahtar kelime eşleştirme önerileri (AI).
+- **Şablon seçimi (4 tema: Modern, Klasik/serif, Minimal, Kompakt)** — önizleme ve PDF anında değişir; Klasik için Roboto Slab serif fontu (Türkçe destekli) kaydedildi.
+- **Sürükle-bırak bölüm sıralaması** (yukarı/aşağı ok yedeği ile) — sıra hem editörde hem önizlemede hem PDF'te uygulanır.
+- **İş İlanı Eşleştirme** — ilan metnini yapıştır, eşleşme skoru + eksik/eşleşen anahtar kelimeler; eksik kelimeye tıklayınca Becerilere eklenir (Türkçe stopword filtresi).
+- Verified: testing agent iteration_1 (MVP) ve iteration_2 (3 yeni özellik) %100 frontend pass, sıfır JS hatası; sans+serif PDF Türkçe metin extract testi geçti.
