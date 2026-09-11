@@ -7,7 +7,7 @@ export const TemplatePicker = ({ value, onChange }) => (
       <LayoutTemplate className="h-4 w-4 text-slate-500" />
       <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Şablon Seçimi</span>
     </div>
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2 lg:grid-cols-5">
       {TEMPLATES.map((t) => {
         const active = value === t.id;
         return (
@@ -21,10 +21,20 @@ export const TemplatePicker = ({ value, onChange }) => (
           >
             {/* mini preview */}
             <div className="h-14 w-full overflow-hidden rounded bg-white ring-1 ring-slate-100" style={{ fontFamily: t.previewFont }}>
-              <div className="px-2 pt-1.5" style={{ textAlign: t.align }}>
-                <div className="h-1.5 w-8 rounded-sm" style={{ backgroundColor: t.accent, margin: t.align === "center" ? "0 auto" : undefined }} />
-                <div className="mt-1 h-0.5 w-full bg-slate-200" />
-              </div>
+              {t.showPhoto ? (
+                <div className="flex items-center gap-1.5 px-2 pt-1.5">
+                  <div className="h-4 w-4 shrink-0 rounded-full" style={{ backgroundColor: t.accent }} />
+                  <div className="flex-1">
+                    <div className="h-1 w-8 rounded-sm bg-slate-400" />
+                    <div className="mt-0.5 h-0.5 w-full bg-slate-200" />
+                  </div>
+                </div>
+              ) : (
+                <div className="px-2 pt-1.5" style={{ textAlign: t.align }}>
+                  <div className="h-1.5 w-8 rounded-sm" style={{ backgroundColor: t.accent, margin: t.align === "center" ? "0 auto" : undefined }} />
+                  <div className="mt-1 h-0.5 w-full bg-slate-200" />
+                </div>
+              )}
               <div className="mt-1.5 space-y-1 px-2">
                 <div className="h-1 w-10 rounded-sm" style={{ backgroundColor: t.divider === "none" ? "#94a3b8" : t.accent }} />
                 <div className="h-0.5 w-full bg-slate-200" />

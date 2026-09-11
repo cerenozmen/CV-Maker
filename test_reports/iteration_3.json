@@ -1,0 +1,22 @@
+{
+  "summary": "Frontend-only testing of Turkish ATS CV builder — Klasik font change to sans-serif + new Fotoğraflı template with optional photo upload. All requested flows verified end-to-end on desktop viewport 1920x900.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Non-blocking: react-pdf emits 'Buffer is not defined' warnings in console during PDF generation. PDFs still generate correctly, but consider adding a Buffer polyfill (e.g., buffer package via CRACO/webpack ProvidePlugin) to silence the warning."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "test_credentials": "N/A",
+  "seed_data_creation": "Used the built-in 'Örnek Veri' (load-sample) to populate CV data. Uploaded a small test PNG (8x8) via [data-testid=\"input-photo\"].",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Verified: (1) Template picker shows 5 templates (modern/klasik/minimal/kompakt/fotografli). (2) Klasik cv-preview-paper computed fontFamily = 'Arial, Helvetica, sans-serif' — no longer serif. Name centered, section headers uppercase with underline. (3) Photo upload via set_input_files on '[data-testid=\"input-photo\"]' works — thumbnail becomes a data:image/jpeg URL after client-side canvas resize, remove-photo-button appears. (4) cv-photo element is only rendered when a photo-enabled template (fotografli) is selected; hidden for klasik even with photo present in state. (5) After selecting fotografli, cv-photo contains <img>; all Turkish sections render (visible in preview screenshot). (6) remove-photo-button clears the photo — cv-photo falls back to 'Fotoğraf' placeholder text with no img. (7) localStorage 'ats-cv-data-v1' persists both template='fotografli' and the base64 photo data URL across a full page reload — photo re-renders. (8) PDF download works for both 'fotografli' (with photo embedded) and 'klasik' — file 'Ahmet_Yılmaz_CV.pdf' downloaded, no JS errors (only benign 'Buffer is not defined' warning from react-pdf internals). (9) Regression testids present: section-down-summary, job-text-input, ats-score-checker, clear-form. No fixes were needed.",
+  "rca of the issue": "N/A — no issues found."
+}

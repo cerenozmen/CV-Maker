@@ -1,4 +1,4 @@
-import { Document, Page, View, Text, StyleSheet, Font } from "@react-pdf/renderer";
+import { Document, Page, View, Text, Image, StyleSheet, Font } from "@react-pdf/renderer";
 import { dateRange, formatDate } from "../lib/cvUtils";
 import { getTemplate } from "../lib/templates";
 
@@ -8,13 +8,6 @@ Font.register({
     { src: "https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf", fontWeight: 400 },
     { src: "https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuYjammT.ttf", fontWeight: 700 },
     { src: "https://fonts.gstatic.com/s/roboto/v51/KFOKCnqEu92Fr1Mu53ZEC9_Vu3r1gIhOszmOClHrs6ljXfMMLoHQiA8.ttf", fontStyle: "italic" },
-  ],
-});
-Font.register({
-  family: "RobotoSlab",
-  fonts: [
-    { src: "https://fonts.gstatic.com/s/robotoslab/v36/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISWaA.ttf", fontWeight: 400 },
-    { src: "https://fonts.gstatic.com/s/robotoslab/v36/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoa4OWaA.ttf", fontWeight: 700 },
   ],
 });
 Font.registerHyphenationCallback((word) => [word]);
@@ -38,6 +31,8 @@ function buildStyles(templateId) {
   const styles = StyleSheet.create({
     page: { fontFamily: t.pdfFont, fontSize: d.body, color: "#1a1a1a", paddingVertical: 40, paddingHorizontal: 44, lineHeight: 1.4 },
     header: { borderBottomWidth: 1, borderBottomColor: "#cbd5e1", paddingBottom: 8, marginBottom: 4, textAlign: t.align },
+    headerRow: { flexDirection: "row", alignItems: "center", textAlign: "left" },
+    photo: { width: 68, height: 68, borderRadius: 34, objectFit: "cover", marginRight: 14, borderWidth: 1.5, borderColor: t.accent },
     name: { fontSize: 20, fontWeight: 700, textTransform: t.nameUpper ? "uppercase" : "none", letterSpacing: t.nameUpper ? 1 : 0, color: "#0f172a" },
     title: { fontSize: 12, marginTop: 2, color: t.accent },
     contact: { fontSize: 8.5, marginTop: 6, color: "#334155" },
@@ -58,6 +53,7 @@ function buildStyles(templateId) {
 
 export const CvPdfDocument = ({ data, template, order }) => {
   const s = buildStyles(template);
+  const t = getTemplate(template);
   const p = data.personal || {};
   const fullName = `${p.firstName || ""} ${p.lastName || ""}`.trim() || "Adınız Soyadınız";
   const contacts = [p.email, p.phone, p.location, p.linkedin, p.github, p.website].filter(Boolean);
@@ -167,9 +163,22 @@ export const CvPdfDocument = ({ data, template, order }) => {
     <Document title={`${fullName} - CV`} author={fullName}>
       <Page size="A4" style={s.page}>
         <View style={s.header}>
-          <Text style={s.name}>{fullName}</Text>
-          {p.title ? <Text style={s.title}>{p.title}</Text> : null}
-          {contacts.length ? <Text style={s.contact}>{contacts.join("   •   ")}</Text> : null}
+          {t.showPhoto ? (
+            <View style={s.headerRow}>
+              {p.photo ? <Image src={p.photo} style={s.photo} /> : null}
+              <View style={{ flex: 1 }}>
+                <Text style={s.name}>{fullName}</Text>
+                {p.title ? <Text style={s.title}>{p.title}</Text> : null}
+                {contacts.length ? <Text style={s.contact}>{contacts.join("   •   ")}</Text> : null}
+              </View>
+            </View>
+          ) : (
+            <>
+              <Text style={s.name}>{fullName}</Text>
+              {p.title ? <Text style={s.title}>{p.title}</Text> : null}
+              {contacts.length ? <Text style={s.contact}>{contacts.join("   •   ")}</Text> : null}
+            </>
+          )}
         </View>
         {(order || []).map((id) => (
           <View key={id}>{renderers[id] ? renderers[id]() : null}</View>

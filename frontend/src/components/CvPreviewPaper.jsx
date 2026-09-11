@@ -24,6 +24,22 @@ export const CvPreviewPaper = ({ data, template, order }) => {
   const p = data.personal || {};
   const fullName = `${p.firstName || ""} ${p.lastName || ""}`.trim() || "Adınız Soyadınız";
   const contacts = [p.email, p.phone, p.location, p.linkedin, p.github, p.website].filter(Boolean);
+  const showPhoto = t.showPhoto;
+
+  const headerText = (
+    <div className="min-w-0" style={{ textAlign: showPhoto ? "left" : t.align }}>
+      <h1
+        className="font-bold text-slate-900"
+        style={{ fontSize: 26, textTransform: t.nameUpper ? "uppercase" : "none", letterSpacing: t.nameUpper ? "1px" : "0" }}
+      >
+        {fullName}
+      </h1>
+      {p.title && <p className="mt-0.5 font-medium" style={{ fontSize: 14, color: t.accent }}>{p.title}</p>}
+      {contacts.length > 0 && (
+        <p className="mt-2 leading-relaxed text-slate-700" style={{ fontSize: 11 }}>{contacts.join("  •  ")}</p>
+      )}
+    </div>
+  );
 
   const secTitle = (title) => (
     <h2
@@ -157,16 +173,24 @@ export const CvPreviewPaper = ({ data, template, order }) => {
       className="mx-auto w-full max-w-[794px] bg-white p-10 sm:p-12"
       style={{ fontFamily: t.previewFont, minHeight: "1123px" }}
     >
-      <header className="border-b border-slate-300 pb-3" style={{ textAlign: t.align }}>
-        <h1
-          className="font-bold text-slate-900"
-          style={{ fontSize: 26, textTransform: t.nameUpper ? "uppercase" : "none", letterSpacing: t.nameUpper ? "1px" : "0" }}
-        >
-          {fullName}
-        </h1>
-        {p.title && <p className="mt-0.5 font-medium" style={{ fontSize: 14, color: t.accent }}>{p.title}</p>}
-        {contacts.length > 0 && (
-          <p className="mt-2 leading-relaxed text-slate-700" style={{ fontSize: 11 }}>{contacts.join("  •  ")}</p>
+      <header className="border-b border-slate-300 pb-3">
+        {showPhoto ? (
+          <div className="flex items-center gap-5">
+            <div
+              className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-100"
+              style={{ border: `2px solid ${t.accent}` }}
+              data-testid="cv-photo"
+            >
+              {p.photo ? (
+                <img src={p.photo} alt={fullName} className="h-full w-full object-cover" />
+              ) : (
+                <span className="text-[10px] font-medium text-slate-400">Fotoğraf</span>
+              )}
+            </div>
+            {headerText}
+          </div>
+        ) : (
+          headerText
         )}
       </header>
 
